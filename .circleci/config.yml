@@ -169,20 +169,25 @@ jobs:
     docker:
       - image: python:3.7-alpine3.11ode:13.8.0
     steps:
-      # Checkout code from git
-      # Add ssh keys with fingerprint
-      # attach workspace
+      - checkout
+      - attach_workspace:
+          at: .
+      - add_ssh_keys:
+          fingerprints:
+            - "9e:a0:5e:7f:c4:1a:60:f1:a4:aa:72:65:ea:f9:8e:25"
       - run:
           name: Install dependencies
           command: |
-            # Your code here
-            exit 1
+            pip install 
+            apk add --update node npm ansible
       - run:
           name: Configure server
           command: |
-            # Your code here
-            exit 1
-      # Here's where you will add some code to rollback on failure      
+            ansible-playbook -i ./.circleci/ansible/inventory.txt ./.circleci/ansible/configure-server.yml
+      - destroy-environment:
+            id: ${CIRCLE_WORKFLOW_ID:0:7}
+            when: on_fail
+
 
   run-migrations:
     docker:
