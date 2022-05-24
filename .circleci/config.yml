@@ -168,7 +168,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: python:3.7-alpine3.16
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - attach_workspace:
@@ -178,9 +178,8 @@ jobs:
             - "9e:a0:5e:7f:c4:1a:60:f1:a4:aa:72:65:ea:f9:8e:25"
       - run:
           name: Install dependencies
-          command: |
-            pip install awscli
-            apk add --update ansible aws-cli
+          command: |     
+            apk add --update ansible
       - run:
           name: Configure server
           command: |
