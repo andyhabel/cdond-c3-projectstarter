@@ -13,7 +13,7 @@
     - ansible_stdout_callback: yaml
 
   pre_tasks:
-     name: "Wait 600 seconds for connection
+     name: "Wait 600 seconds for connection"
      wait_for_connection:
        delay: 0
        timeout: 600
