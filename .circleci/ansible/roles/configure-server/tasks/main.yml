@@ -4,7 +4,7 @@
   apt:
     update_cache: yes
 
-- name: "Remove dependencies that are no longer required"
+- name: "Remove old dependencies"
   become: true
   apt:
     autoremove: yes
