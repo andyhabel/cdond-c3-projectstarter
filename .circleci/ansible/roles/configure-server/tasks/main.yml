@@ -1,0 +1,12 @@
+---
+- name: "install dependencies"
+  become: true
+  apt:
+    name: ["nodejs", "npm"]
+    state: latest
+
+- name: "install pm2"
+  become: true
+  npm:
+    name: pm2
+    state: present
