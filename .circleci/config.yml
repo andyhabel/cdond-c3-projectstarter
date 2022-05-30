@@ -219,7 +219,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
@@ -244,7 +244,10 @@ jobs:
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive  
-                    
+      - destroy-environment:
+            id: ${CIRCLE_WORKFLOW_ID:0:7}
+            when: on_fail
+            
   deploy-backend:
     docker:
       - image: circleci/node:13.8.0
