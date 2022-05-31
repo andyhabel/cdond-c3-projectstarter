@@ -238,6 +238,8 @@ jobs:
             echo "${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
             cat frontend/.env
+            #post to kvdb
+            curl https://kvdb.io/8E5myACp3tQAPuneCBEqdv/migration_${CIRCLE_WORKFLOW_ID:0:7}  -k -d "${BACKEND_URL}"
       - run:
           name: Deploy frontend objects
           command: |
