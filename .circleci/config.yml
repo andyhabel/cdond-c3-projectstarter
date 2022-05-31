@@ -20,6 +20,8 @@ commands:
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
+      when:
+        type: string
       id:
         type: string 
     steps:
@@ -36,6 +38,8 @@ commands:
               npm install
               npm run migrations:revert
             fi
+          when: << parameters.when >>
+
             
 jobs:
   build-frontend:
@@ -328,6 +332,7 @@ jobs:
           when: on_fail
       - revert-migrations:
           id: ${CIRCLE_WORKFLOW_ID:0:7}
+          when: on_fail
   
   cloudfront-update:
     docker:
@@ -349,8 +354,7 @@ jobs:
       - destroy-environment:
           id: ${CIRCLE_WORKFLOW_ID:0:7}
           when: on_fail
-      - revert-migrations:
-          id: ${CIRCLE_WORKFLOW_ID:0:7}  
+
             
 
 
