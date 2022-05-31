@@ -302,6 +302,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update curl nodejs npm
+            apk add --no-cache python3 py3-pip 
             pip install awscli
       - run:
           name: Get backend url and smoketest
