@@ -288,7 +288,7 @@ jobs:
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml
+            ansible-playbook -i inventory.txt deploy-backend.yml -v
       - destroy-environment:
             id: ${CIRCLE_WORKFLOW_ID:0:7}
             when: on_fail
@@ -331,9 +331,9 @@ jobs:
       - revert-migrations:
           id: ${CIRCLE_WORKFLOW_ID:0:7}
           when: on_fail
-      - destroy-environment:
-          id: ${CIRCLE_WORKFLOW_ID:0:7}
-          when: on_fail
+      #- destroy-environment:
+      #    id: ${CIRCLE_WORKFLOW_ID:0:7}
+      #    when: on_fail
   
   cloudfront-update:
     docker:
