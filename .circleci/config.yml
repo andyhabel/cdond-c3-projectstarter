@@ -30,7 +30,7 @@ commands:
           
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            $SUCCESS = $(curl https://kvdb.io/RSgFzhXLyYkGHTFcJWAmew/migration_${CIRCLE_WORKFLOW_ID:0:7})   -k 
+            #$SUCCESS = $(curl https://kvdb.io/RSgFzhXLyYkGHTFcJWAmew/migration_${CIRCLE_WORKFLOW_ID:0:7})   -k 
             SUCCESS = 1
             if(( $SUCCESS==1 )); 
             then
@@ -316,7 +316,7 @@ jobs:
             #else
             #  return 1
             #fi
-            return 0
+            #return 0
       - run:
           name: Frontend smoke test.
           command: |
